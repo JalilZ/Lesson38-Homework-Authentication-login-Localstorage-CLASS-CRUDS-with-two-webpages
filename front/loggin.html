@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <meta http-equiv="Permissions-Policy" content="interest-cohort=()">
+    <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+
+    <title>Document</title>
+</head>
+<body>
+    <!--Authentication1 START-->
+    <div class="jalil-auth">
+        <input type="text" id="uname" placeholder="Username: jalil" class="col-sm-2 col-form-label"/> 
+        <input type="text" id="pwd" placeholder="Password: jalilpython" class="col-sm-2.5 col-form-label"/>
+        <button type="button" class="btn btn-secondary mb-1" onclick="login()">Login</button>
+        <button type="button" class="btn btn-secondary mb-1" onclick="loadData()">Get Students</button>
+        </div>
+    <!--Authentication1 END-->
+
+    <script>
+        const AUTH_SERVER = "http://127.0.0.1:8000/"
+        let myToken = "";
+
+        const login = async() => {
+            await axios.post(AUTH_SERVER + "/login/",{
+                "username": uname.value,
+                "password": pwd.value
+            })
+            .then((res) => (myToken = res.data.access)); // we ask here for access (in data we have access & refresh)
+            console.log(myToken)
+            localStorage.setItem("Access Token Database", JSON.stringify(myToken))
+            getin()
+
+        };
+
+        const getin = () =>{
+            // in the login() we saved the token in 'myToken', now each time we call this CRUD, a verification is in effect
+            const config = {
+                headers: {Authorization: `Bearer ${myToken}`}
+            
+            };
+            window.location.href = 'school.html'
+        }
+
+    </script>
+
+</body>
+</html>
