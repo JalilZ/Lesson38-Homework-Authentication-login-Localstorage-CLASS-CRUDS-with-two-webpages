@@ -20,10 +20,11 @@
         <input type="text" id="uname" placeholder="Username: jalil" class="col-sm-2 col-form-label"/> 
         <input type="text" id="pwd" placeholder="Password: jalilpython" class="col-sm-2.5 col-form-label"/>
         <button type="button" class="btn btn-secondary mb-1" onclick="login()">Login</button>
-        <button type="button" class="btn btn-secondary mb-1" onclick="loadData()">Get Students</button>
-        </div>
+    </div>
     <!--Authentication1 END-->
 
+
+    <!--posting username and possword to back-end server, if all is good then result.data.access is saved to myToken and then to localStorage-->
     <script>
         const AUTH_SERVER = "http://127.0.0.1:8000/"
         let myToken = "";
@@ -37,15 +38,10 @@
             console.log(myToken)
             localStorage.setItem("Access Token Database", JSON.stringify(myToken))
             getin()
-
         };
 
         const getin = () =>{
-            // in the login() we saved the token in 'myToken', now each time we call this CRUD, a verification is in effect
-            const config = {
-                headers: {Authorization: `Bearer ${myToken}`}
-            
-            };
+
             window.location.href = 'school.html'
         }
 

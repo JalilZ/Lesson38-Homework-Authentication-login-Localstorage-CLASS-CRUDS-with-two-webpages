@@ -44,8 +44,10 @@
 
 
     <script>
+        //taking access token from local storage and saving it to myToken
         var myToken = JSON.parse(localStorage.getItem("Access Token Database")) // JSON.parse was used to remove tailing "" in the token!!
         console.log(myToken);
+
         const MY_SERVER = "http://127.0.0.1:8000/students/" // had to add last slash else I receive CORS error
 
         const loadData = async () => {
